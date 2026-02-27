@@ -1,0 +1,7 @@
+from django.apps import AppConfig
+
+
+class YogaConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'yoga'
+    verbose_name = 'תבונת המעבר'

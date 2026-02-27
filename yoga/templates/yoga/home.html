@@ -1,0 +1,57 @@
+{% extends "yoga/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-wrapper">
+  {% comment %} HEADER {% endcomment %}
+  <header class="site-header">
+    <div class="site-header__inner">
+      <div class="site-header__right">
+        {% if site_settings.logo_text %}
+          <img class="site-header__logo-text" src="{{ site_settings.logo_text.url }}" alt="תבונת המעבר" width="345" height="45">
+        {% else %}
+          <img class="site-header__logo-text" src="{% static 'yoga/images/logo-text.svg' %}" alt="תבונת המעבר" width="345" height="45">
+        {% endif %}
+        <p class="site-header__tagline">{{ site_settings.header_tagline }}</p>
+      </div>
+      <a href="/" class="site-header__logo-link" aria-label="תבונת המעבר">
+        {% if site_settings.logo %}
+          <img class="site-header__logo" src="{{ site_settings.logo.url }}" alt="תבונת המעבר" width="149" height="102">
+        {% elif use_figma_logo %}
+          <img class="site-header__logo {% if figma_logo_crop %}site-header__logo--crop{% endif %}" src="{% static figma_logo_file %}" alt="תבונת המעבר" width="149" height="102">
+        {% else %}
+          <img class="site-header__logo" src="{% static 'yoga/images/logo.svg' %}" alt="תבונת המעבר" width="149" height="102">
+        {% endif %}
+      </a>
+    </div>
+  </header>
+
+  {% comment %} HERO SECTION {% endcomment %}
+  <section class="hero-section">
+    <div
+      class="hero-banner"
+      {% if homepage.hero_image %}
+        style="background-image: url('{{ homepage.hero_image.url }}');"
+      {% elif use_figma_hero %}
+        style="background-image: url('{% static figma_hero_file %}');"
+      {% endif %}
+    >
+      <div class="hero-banner__overlay">
+        <h1 class="hero-banner__title">{{ homepage.hero_overlay_title }}</h1>
+        {% if homepage.hero_overlay_image %}
+          <img class="hero-banner__flower" src="{{ homepage.hero_overlay_image.url }}" alt="" width="80" height="80">
+        {% else %}
+          <img class="hero-banner__flower" src="{% static 'yoga/images/flower.svg' %}" alt="" width="80" height="80">
+        {% endif %}
+        <p class="hero-banner__text">{{ homepage.hero_overlay_text }}</p>
+      </div>
+    </div>
+
+    <div class="hero-text-area">
+      <hr class="hero-text-area__line">
+      <p class="hero-text-area__subtitle">{{ homepage.hero_subtitle }}</p>
+      <a href="{{ homepage.hero_cta_link|default:'#contact' }}" class="hero-text-area__cta">{{ homepage.hero_cta_text }}</a>
+    </div>
+  </section>
+</div>
+{% endblock %}
