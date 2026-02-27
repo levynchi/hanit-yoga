@@ -43,7 +43,7 @@
         {% else %}
           <img class="hero-banner__flower" src="{% static 'yoga/images/flower.svg' %}" alt="" width="80" height="80">
         {% endif %}
-        <p class="hero-banner__text">{{ homepage.hero_overlay_text }}</p>
+        <div class="hero-banner__text">{{ homepage.hero_overlay_text|linebreaksbr }}</div>
       </div>
     </div>
 
@@ -53,5 +53,208 @@
       <a href="{{ homepage.hero_cta_link|default:'#contact' }}" class="hero-text-area__cta">{{ homepage.hero_cta_text }}</a>
     </div>
   </section>
+
+  {% comment %} SECTION 2 - Pink text + circles {% endcomment %}
+  <section class="section section-2">
+    <div class="section-2__row">
+      <div class="section-2__text">
+        <h2 class="section-2__heading">למה זה חשוב דווקא עכשיו ?</h2>
+        <div class="section-2__body">
+          <p>נשים רבות בגילאי 40+ נמצאות בשיא הקריירה: מובילות צוותים, מחזיקות אחריות מקצועית, מנהלות בית ומשפחה. במקביל מתחילים להופיע שינויים פיזיים ורגשיים שקטים: עייפות מצטברת, קושי בריכוז, שינה פחות יציבה, רגישות רגשית או ירידה באנרגיה. רוב הנשים אינן מקשרות סימנים אלו לתחילתו של גיל המעבר (פרימנופאוזה), לעיתים בשל חוסר ידע, עומס יומיומי או תפיסה שגיל המעבר ״עוד רחוק״. ארגון שבוחר להקדים ידע ומודעות – מייצר סביבה שמבינה נשים ולא מחכה למשבר.</p>
+        </div>
+        <h3 class="section-2__subheading">מה קורה לנשים באמצע החיים<br>גם במקום העבודה</h3>
+        <div class="section-2__body">
+          <p>מחקרים בינלאומיים מצביעים על כך ששינויים הורמונליים משפיעים על תפקוד בעבודה עוד שנים לפני המנופאוזה עצמה. כאשר אין ידע או לגיטימציה, נשים חוות בלבול, שחיקה ולעיתים פגיעה בתחושת הערך והמסוגלות. ידע מוקדם ותמיכה ארגונית מחזקים תחושת שייכות ומחויבות, תומכים בשימור נשים מנוסות, מצמצמים שחיקה שקטה ומשדרים תרבות ארגונית מתקדמת ורגישה.</p>
+        </div>
+      </div>
+      <div class="section-2__image">
+        <img src="{% static 'yoga/images/pic-section2.png' %}" alt="">
+      </div>
+    </div>
+    <div class="section-2__circles">
+      <h3 class="section-2__circles-title">מה מציעה הסדנה "אם היית פרח"<br>סדנה נשית, חווייתית ומקצועית, המיועדת לנשים בנות 40+<br>ומותאמת לעולם האירגוני</h3>
+      <div class="section-2__circles-row">
+        <div class="circle-item">
+          <img class="circle-item__icon" src="{% static 'yoga/images/flower-small.svg' %}" alt="" width="40" height="32">
+          <p class="circle-item__text">ידע מקצועי<br>ברור ונגיש<br>על שלב המעבר המוקדם<br>(פרימנופאוזה)</p>
+        </div>
+        <div class="circle-item">
+          <img class="circle-item__icon" src="{% static 'yoga/images/flower-small.svg' %}" alt="" width="40" height="32">
+          <p class="circle-item__text">חיבור לגוף ולשינויים<br>דרך שפה רכה<br>ולא רפואית בלבד</p>
+        </div>
+        <div class="circle-item">
+          <img class="circle-item__icon" src="{% static 'yoga/images/flower-small.svg' %}" alt="" width="40" height="32">
+          <p class="circle-item__text">עבודה עם דימויים<br>טבעיים ונשיים</p>
+        </div>
+        <div class="circle-item">
+          <img class="circle-item__icon" src="{% static 'yoga/images/flower-small.svg' %}" alt="" width="40" height="32">
+          <p class="circle-item__text">כלים יישומיים<br>ליום-יום</p>
+        </div>
+        <div class="circle-item">
+          <img class="circle-item__icon" src="{% static 'yoga/images/flower-small.svg' %}" alt="" width="40" height="32">
+          <p class="circle-item__text">מרחב בטוח לשיח<br>נרמול והבנה</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% comment %} SECTION 3 - Turquoise belt + 4 round images {% endcomment %}
+  <section class="section section-3">
+    <div class="section-3__belt">
+      <div class="section-3__col section-3__col--left">
+        <h2 class="section-3__heading">ההשפעה הארגונית של הסדנה</h2>
+        <ul class="section-3__list">
+          <li>חיזוק רווחת העובדות</li>
+          <li>שימור נשים מנוסות ומשמעותיות</li>
+          <li>העלאת מחויבות ותחושת ערך</li>
+          <li>תרבות ארגונית רגישה, מודעת ומתקדמת</li>
+        </ul>
+      </div>
+      <div class="section-3__divider"></div>
+      <div class="section-3__col section-3__col--right">
+        <h2 class="section-3__heading">הסדנה נשענת על עקרונות של<br>סביבת עבודה בריאה</h2>
+        <p class="section-3__intro">הסדנה משתלבת בעקרונות מודל חמשת המרכיבים של סביבת עבודה בריאה (שפותח ע"י היועץ הרפואי הראשי של ממשלת ארה"ב), ומתרגמת אותם לעבודה נשית, חווייתית ומעשית :</p>
+        <ul class="section-3__list">
+          <li>ביטחון רגשי - מרחב בטוח לשיח על שינויים פיזיים ורגשיים</li>
+          <li>שייכות וחיבור - נרמול ותחושת "אני לא לבד"</li>
+          <li>איזון חיים-עבודה - כלים לניהול אנרגיה, עומס ושחיקה</li>
+          <li>תחושת ערך - מסר ארגוני ברור: את חשובה כאן</li>
+          <li>צמיחה והתפתחות - גיל המעבר כשלב של חיזוק ובשלות</li>
+        </ul>
+      </div>
+    </div>
+    <div class="section-3__images">
+      <img src="{% static 'yoga/images/ellipse4.png' %}" alt="" class="section-3__round-img">
+      <img src="{% static 'yoga/images/ellipse1.png' %}" alt="" class="section-3__round-img">
+      <img src="{% static 'yoga/images/ellipse2.png' %}" alt="" class="section-3__round-img">
+      <img src="{% static 'yoga/images/ellipse3.png' %}" alt="" class="section-3__round-img">
+    </div>
+  </section>
+
+  {% comment %} SECTION 4 - Image left + pink right {% endcomment %}
+  <section class="section section-4">
+    <div class="section-4__image">
+      <img src="{% static 'yoga/images/pic-section4.png' %}" alt="">
+    </div>
+    <div class="section-4__pink">
+      <h2 class="section-4__heading">למה זה חשוב לנשים ?</h2>
+      <p class="section-4__intro">השלב הזה בחיים לא אמור להפתיע<br>ידע מוקדם מאפשר בחירה, כוח ושקט פנימי<br>בסדנה נשים לומדות:</p>
+      <ul class="section-4__list">
+        <li>איך נראית תחילת גיל המעבר עוד לפני התסמינים המוכרים</li>
+        <li>איך להקשיב לגוף בלי פחד ובלי ביקורת</li>
+        <li>מה אפשר לעשות כדי להקל, לאזן ולחזק את הגוף והנפש</li>
+        <li>איך להכנס לשלב הבא בחיים מתוך מודעות ובהירות</li>
+      </ul>
+      <p class="section-4__closing">כשנותנים שם לשינויים – מחזירים את הכוח.<br>והארגון מרוויח אישה מחוברת, רגועה וחזקה יותר.</p>
+    </div>
+  </section>
+
+  {% comment %} SECTION 5 - About facilitators {% endcomment %}
+  <section class="section section-5">
+    <div class="section-5__text">
+      <h2 class="section-5__heading">על המנחות</h2>
+      <h3 class="section-5__names">לימור אפורי וחנית רפאלי</h3>
+      <p class="section-5__body">מייסדות תבונת המעבר - מרחב לנשים באמצע החיים. לימור אפורי - יועצת אירגונית ומנחת קבוצות, נסיון עשיר בהובלת תהליכי שינוי ארגוניים ואישיים. חנית רפאלי - מטפלת ברפואה משלימה, בעלת נסיון רב בליווי תהליכי גוף-נפש לנשים.</p>
+    </div>
+    <div class="section-5__photo">
+      <img src="{% static 'yoga/images/facilitators.png' %}" alt="לימור אפורי וחנית רפאלי">
+    </div>
+  </section>
+
+  {% comment %} SECTION 6 - Quotes carousel {% endcomment %}
+  <section class="section section-6">
+    <button type="button" class="section-6__arrow section-6__arrow--prev" aria-label="הקודם">‹</button>
+    <p class="section-6__quote">"במשך שנים הקשבת לצרכים של אחרים. גיל המעבר הוא הזמנה של הגוף שלך - להתחיל להקשיב לעצמך."</p>
+    <button type="button" class="section-6__arrow section-6__arrow--next" aria-label="הבא">›</button>
+  </section>
+
+  {% comment %} SECTION 7 - Testimonials grid {% endcomment %}
+  <section class="section section-7">
+    <h2 class="section-7__heading">משתתפות משתפות</h2>
+    <div class="section-7__grid">
+      <div class="testimonial-card testimonial-card--teal">
+        <p class="testimonial-card__text">"בתור מנהלת, התרגלתי לשים מסכה ולהתעלם ממה שעובר עליי. הייתי יושבת בישיבות, מרגישה את גלי החום עולים, ורק מתפללת שזה ייגמר. הסדנה הזו הייתה הפעם הראשונה שעצרתי לנשום. הופתעתי לגלות כמה כוח יש במפגש נשי בתוך הארגון. זה לא היה רק 'שיח בנות', אלא קיבלתי כלים פרקטיים לניהול האנרגיה שלי במהלך יום עבודה. יצאתי בתחושה שאני לא צריכה להתנצל על הגוף שלי, אלא ללמוד לעבוד איתו. חובה לכל ארגון שמכבד את העובדות שלו." – יעל, 48, מנהלת משאבי אנוש</p>
+        <img src="{% static 'yoga/images/icon-quotes-teal.svg' %}" alt="" class="testimonial-card__icon">
+      </div>
+      <div class="testimonial-card testimonial-card--pink">
+        <p class="testimonial-card__text">"הגעתי סקפטית. חשבתי שזה יהיה מביך לדבר על גיל המעבר עם הקולגות שלי למשרד. אבל תוך עשר דקות, המבוכה התחלפה באנחת רווחה ענקית. פתאום הבנתי שאני לא 'משתגעת', ושאני לא לבד. האווירה הייתה רכה, מכילה ומאוד מכבדת. יצאתי עם ידע שנתן לי המון שקט נפשי, ובעיקר עם תחושת שייכות. זה היה כמו אי של שפיות בתוך המירוץ המטורף של העבודה והבית." – רונית, 52, מנהלת חשבונות</p>
+        <img src="{% static 'yoga/images/icon-quotes-pink.svg' %}" alt="" class="testimonial-card__icon">
+      </div>
+      <div class="testimonial-card testimonial-card--border">
+        <p class="testimonial-card__text">"שנים סבלתי מעייפות ומצבי רוח ולא הבנתי למה הגוף שלי 'בוגד' בי. הסדנה עשתה לי סדר בראש. ההסברים היו מרתקים, והחיבור בין הידע הרפואי לכלים הטבעיים היה מדויק. אימצתי את הטיפים על התזונה והנשימות שכבר עוזרים לי לישון טוב יותר בלילה. סוף סוף מישהי הסבירה לי את ה'למה' ונתנה לי את ה'איך'. מתנה אמיתית לגוף ולנפש." – סיגל, 50, אדריכלית תוכנה</p>
+        <img src="{% static 'yoga/images/icon-quotes-dark.svg' %}" alt="" class="testimonial-card__icon">
+      </div>
+      <div class="testimonial-card testimonial-card--pink-light">
+        <p class="testimonial-card__text">"חששתי שזה יהיה מביך במסגרת העבודה, אבל הופתעתי לטובה. האווירה הייתה מכבדת ונעימה, ויצאתי עם תחושת הקלה עצומה פתאום הבנתי שאני ממש לא לבד בסיפור הזה:" – יעל, מנהלת פרויקטים</p>
+        <img src="{% static 'yoga/images/icon-quotes-pink.svg' %}" alt="" class="testimonial-card__icon">
+      </div>
+      <div class="testimonial-card testimonial-card--teal">
+        <p class="testimonial-card__text">"סוף סוף מישהי עשתה לי סדר בראש. קיבלתי כלים פשוטים שעוזרים לי להתמודד עם העייפות והשינויים, והכל הועבר בצורה רכה, חכמה ובגובה העיניים." – רונית, חשבת שכר</p>
+        <img src="{% static 'yoga/images/icon-quotes-teal.svg' %}" alt="" class="testimonial-card__icon">
+      </div>
+      <div class="testimonial-card testimonial-card--white">
+        <img src="{% static 'yoga/images/icon-quotes-pink.svg' %}" alt="" class="testimonial-card__icon">
+      </div>
+    </div>
+  </section>
+
+  {% comment %} SECTION 8 - Contact form {% endcomment %}
+  <section class="section section-8" id="contact">
+    <h2 class="section-8__heading">ליצירת קשר</h2>
+    <form class="section-8__form" action="#" method="post">
+      {% csrf_token %}
+      <label class="section-8__field">
+        <span class="section-8__label">*שם מלא</span>
+        <input type="text" name="name" class="section-8__input" placeholder="*שם מלא" required>
+      </label>
+      <label class="section-8__field">
+        <span class="section-8__label">*טלפון</span>
+        <input type="tel" name="phone" class="section-8__input" placeholder="*טלפון" required>
+      </label>
+      <label class="section-8__field">
+        <span class="section-8__label">*מייל</span>
+        <input type="email" name="email" class="section-8__input" placeholder="*מייל" required>
+      </label>
+      <label class="section-8__field section-8__field--message">
+        <span class="section-8__label">*הודעה</span>
+        <textarea name="message" class="section-8__textarea" rows="5" placeholder="*הודעה" required></textarea>
+      </label>
+      <button type="submit" class="section-8__submit">שליחה</button>
+    </form>
+  </section>
+
+  {% comment %} FOOTER {% endcomment %}
+  <footer class="site-footer">
+    <div class="site-footer__main">
+      <div class="site-footer__logo-wrap">
+        <a href="/" class="site-footer__logo-link" aria-label="תבונת המעבר">
+          {% if site_settings.logo %}
+            <img class="site-footer__logo" src="{{ site_settings.logo.url }}" alt="" width="149" height="102">
+          {% elif use_figma_logo %}
+            <img class="site-footer__logo" src="{% static figma_logo_file %}" alt="" width="149" height="102">
+          {% else %}
+            <img class="site-footer__logo" src="{% static 'yoga/images/logo.svg' %}" alt="">
+          {% endif %}
+        </a>
+      </div>
+      <div class="site-footer__content">
+        <div class="site-footer__details">
+          <p class="site-footer__line">חנית רפאלי - 050-7755186</p>
+          <p class="site-footer__line">לימור אפורי - 050-4321288</p>
+          <p class="site-footer__line">tvunat.hameaver@gmail.com</p>
+        </div>
+        <div class="site-footer__social">
+          <a href="#" class="site-footer__social-link" aria-label="רשת חברתית"><img src="{% static 'yoga/images/social-1.svg' %}" alt="" width="40" height="40"></a>
+          <a href="#" class="site-footer__social-link" aria-label="רשת חברתית"><img src="{% static 'yoga/images/social-2.svg' %}" alt="" width="40" height="40"></a>
+          <a href="#" class="site-footer__social-link" aria-label="רשת חברתית"><img src="{% static 'yoga/images/social-3.svg' %}" alt="" width="40" height="40"></a>
+          <a href="#" class="site-footer__social-link" aria-label="רשת חברתית"><img src="{% static 'yoga/images/social-4.svg' %}" alt="" width="40" height="40"></a>
+        </div>
+      </div>
+    </div>
+    <div class="site-footer__line-wrap"><img src="{% static 'yoga/images/line-footer.svg' %}" alt="" class="site-footer__line-img"></div>
+    <div class="site-footer__credit">
+      <p>Design &amp; Development: Levynchi</p>
+    </div>
+  </footer>
 </div>
 {% endblock %}
