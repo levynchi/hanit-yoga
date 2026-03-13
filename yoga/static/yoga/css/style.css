@@ -1014,6 +1014,49 @@ body {
 
 /* ========== TABLET (769px – 1076px): circles 3+2 layout ========== */
 @media (min-width: 769px) and (max-width: 1076px) {
+  /* Header – tablet: same layout as mobile – column, logo on top, tagline below */
+  .site-header {
+    padding: 8px;
+    height: auto;
+    min-height: auto;
+  }
+
+  .site-header__inner {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .site-header__logo-link {
+    order: -1;
+  }
+
+  .site-header__right {
+    flex-direction: column;
+    gap: 0;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .site-header__logo-text {
+    display: none;
+  }
+
+  .site-header__tagline {
+    font-size: 20px;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  .site-header__logo {
+    width: auto;
+    max-width: 171px;
+    height: 90px;
+    object-fit: contain;
+  }
+
   .section-2__circles-row {
     display: flex;
     flex-wrap: wrap;
@@ -1056,6 +1099,37 @@ body {
   .section-5__photo {
     width: 300px;
     height: 300px;
+  }
+
+  /* Section 7 – טאבלט: עמודה אחת, 4 כרטיסים (מחליף את התא הלבן הריק בכרטיס 5) */
+  .section-7__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 0;
+  }
+
+  .section-7__grid .testimonial-card:nth-child(1),
+  .section-7__grid .testimonial-card:nth-child(2),
+  .section-7__grid .testimonial-card:nth-child(4),
+  .section-7__grid .testimonial-card:nth-child(5) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  /* מסתיר את התא הלבן (כרטיס 3) ואת כרטיס 6 */
+  .section-7__grid .testimonial-card:nth-child(3),
+  .section-7__grid .testimonial-card:nth-child(6) {
+    display: none;
+  }
+
+  /* Section 3 – טאבלט: רווח 30px, תמונות 190px */
+  .section-3__carousel-desktop .section-3__images--desktop {
+    gap: 30px;
+  }
+  .section-3__round-img {
+    width: 190px;
+    height: 190px;
   }
 }
 
@@ -1405,8 +1479,8 @@ body {
   }
 
   .section-5__photo {
-    width: 220px;
-    height: 220px;
+    width: 180px;
+    height: 180px;
   }
 
   .section-5__text {
@@ -1454,26 +1528,25 @@ body {
 
   .section-7__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    gap: 8px;
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    gap: 0;
     width: 100%;
     min-width: 0;
     max-width: 100%;
   }
 
-  /* מובייל: רק 4 כרטיסים ראשונים, ללא מיקום ידני */
+  /* מובייל: עמודה אחת, 4 כרטיסים (מחליף את התא הלבן הריק בכרטיס 5) */
   .section-7__grid .testimonial-card:nth-child(1),
   .section-7__grid .testimonial-card:nth-child(2),
-  .section-7__grid .testimonial-card:nth-child(3),
-  .section-7__grid .testimonial-card:nth-child(4) {
-    grid-column: auto;
+  .section-7__grid .testimonial-card:nth-child(4),
+  .section-7__grid .testimonial-card:nth-child(5) {
+    grid-column: 1;
     grid-row: auto;
     min-width: 0;
   }
 
-  /* מובייל: הסתרת כרטיסים 5 ו-6 */
-  .section-7__grid .testimonial-card:nth-child(5),
+  .section-7__grid .testimonial-card:nth-child(3),
   .section-7__grid .testimonial-card:nth-child(6) {
     display: none;
   }
