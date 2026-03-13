@@ -128,3 +128,17 @@ class HomePageQuote(models.Model):
 
     def __str__(self):
         return (self.text[:50] + '…') if len(self.text) > 50 else self.text
+
+
+class Section7Testimonial(models.Model):
+    """כרטיס testimonial בסקשן 'משתתפות משתפות'. אם שדה הטקסט ריק – יוצג טקסט ברירת מחדל."""
+    order = models.PositiveSmallIntegerField(default=1, verbose_name='סדר (1–6)')
+    text = models.TextField(blank=True, verbose_name='טקסט', help_text='אם ריק – יוצג הטקסט הקבוע של אותו מקום (ברירת מחדל).')
+
+    class Meta:
+        ordering = ['order', 'pk']
+        verbose_name = 'משתתפת משתפת (סקשן 7)'
+        verbose_name_plural = 'משתתפות משתפות (סקשן 7)'
+
+    def __str__(self):
+        return (self.text[:50] + '…') if self.text and len(self.text) > 50 else (self.text or f'כרטיס {self.order}')

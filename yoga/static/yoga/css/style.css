@@ -124,7 +124,6 @@ body {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background-color: #e0e0e0;
 }
 
 .hero-banner__overlay {
@@ -665,6 +664,7 @@ body {
 
 .section-6__track {
   display: flex;
+  width: 100%;
   transition: transform 0.3s ease;
   will-change: transform;
 }
@@ -1187,6 +1187,10 @@ body {
     object-fit: contain;
   }
 
+  .hero-section {
+    flex: 0 0 auto;
+  }
+
   /* Hero: on mobile, full image visible (contain), pinned to top like Figma */
   .hero-banner {
     flex-direction: column;
@@ -1211,7 +1215,7 @@ body {
     width: 100%;
     max-width: 100%;
     min-height: 0;
-    padding: 24px 20px;
+    padding: 0px 20px 24px;
     gap: 16px;
     background: var(--color-white);
   }

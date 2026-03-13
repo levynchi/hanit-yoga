@@ -1,9 +1,11 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils.html import format_html
-from .models import SiteSettings, HomePage, HomePageQuote
+from .constants import SECTION7_DEFAULT_TEXTS
+from .models import SiteSettings, HomePage, HomePageQuote, Section7Testimonial
 
 
 # SiteSettings: not in admin – header/logo edited in code only.
@@ -138,3 +140,40 @@ class HomePageQuoteAdmin(admin.ModelAdmin):
     def text_short(self, obj):
         return (obj.text[:60] + '…') if len(obj.text) > 60 else obj.text
     text_short.short_description = 'משפט'
+
+
+class Section7TestimonialForm(forms.ModelForm):
+    """מציג את טקסט ברירת המחדל בשדה כשהטקסט ריק – המשתמש יכול למחוק ולכתוב חדש."""
+
+    class Meta:
+        model = Section7Testimonial
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.pk and not (self.instance.text or '').strip():
+            order = self.instance.order
+            if 1 <= order <= len(SECTION7_DEFAULT_TEXTS):
+                default = SECTION7_DEFAULT_TEXTS[order - 1]
+                self.initial['text'] = default
+
+
+@admin.register(Section7Testimonial)
+class Section7TestimonialAdmin(admin.ModelAdmin):
+    form = Section7TestimonialForm
+    list_display = ('order', 'text_short', 'id')
+    list_display_links = ('text_short',)
+    list_editable = ('order',)
+    ordering = ('order', 'pk')
+
+    def text_short(self, obj):
+        if not obj.text or not obj.text.strip():
+            order = obj.order
+            if 1 <= order <= len(SECTION7_DEFAULT_TEXTS):
+                default = SECTION7_DEFAULT_TEXTS[order - 1]
+                if not default:
+                    return '(כרטיס ללא טקסט – ברירת מחדל)'
+                return (default[:60] + '…') if len(default) > 60 else default
+            return '(ברירת מחדל)'
+        return (obj.text[:60] + '…') if len(obj.text) > 60 else obj.text
+    text_short.short_description = 'טקסט'

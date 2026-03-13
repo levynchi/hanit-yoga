@@ -144,7 +144,7 @@
         {% comment %} 3. Mobile last: סביבת עבודה בריאה {% endcomment %}
         <div class="section-3__col section-3__col--right">
           <h2 class="section-3__heading">הסדנה נשענת על עקרונות של<br>סביבת עבודה בריאה</h2>
-          <p class="section-3__intro">הסדנה משתלבת בעקרונות מודל חמשת המרכיבים של סביבת עבודה בריאה (שפותח ע"י היועץ הרפואי הראשי של ממשלת ארה"ב), ומתרגמת אותם לעבודה נשית, חווייתית ומעשית :</p>
+          <p class="section-3__intro">הסדנה משתלבת בעקרונות מודל חמשת המרכיבים של סביבת עבודה בריאה<br>(שפותח ע"י היועץ הרפואי הראשי של ממשלת ארה"ב), ומתרגמת אותם<br>לעבודה נשית, חווייתית ומעשית :</p>
           <ul class="section-3__list">
             <li>ביטחון רגשי - מרחב בטוח לשיח על שינויים פיזיים ורגשיים</li>
             <li>שייכות וחיבור - נרמול ותחושת "אני לא לבד"</li>
@@ -236,29 +236,12 @@
   <section class="section section-7">
     <h2 class="section-7__heading">משתתפות משתפות</h2>
     <div class="section-7__grid">
-      <div class="testimonial-card testimonial-card--pink-light">
-        <p class="testimonial-card__text">"חששתי שזה יהיה מביך במסגרת העבודה, אבל הופתעתי לטובה. האווירה הייתה מכבדת ונעימה, ויצאתי עם תחושת הקלה עצומה פתאום הבנתי שאני ממש לא לבד בסיפור הזה:" – יעל, מנהלת פרויקטים</p>
-        <img src="{% static 'yoga/images/icon-quotes-pink.svg' %}" alt="" class="testimonial-card__icon">
+      {% for card in section7_cards %}
+      <div class="testimonial-card testimonial-card--{{ card.card_class }}">
+        {% if card.text %}<p class="testimonial-card__text">{{ card.text }}</p>{% endif %}
+        <img src="{% static card.icon %}" alt="" class="testimonial-card__icon">
       </div>
-      <div class="testimonial-card testimonial-card--teal">
-        <p class="testimonial-card__text">"שנים סבלתי מעייפות ומצבי רוח ולא הבנתי למה הגוף שלי 'בוגד' בי. הסדנה עשתה לי סדר בראש. ההסברים היו מרתקים, והחיבור בין הידע הרפואי לכלים הטבעיים היה מדויק. אימצתי את הטיפים על התזונה והנשימות שכבר עוזרים לי לישון טוב יותר בלילה. סוף סוף מישהי הסבירה לי את ה'למה' ונתנה לי את ה'איך'. מתנה אמיתית לגוף ולנפש." – סיגל, 50, אדריכלית תוכנה</p>
-        <img src="{% static 'yoga/images/icon-quotes-teal.svg' %}" alt="" class="testimonial-card__icon">
-      </div>
-      <div class="testimonial-card testimonial-card--white">
-        <img src="{% static 'yoga/images/icon-quotes-pink.svg' %}" alt="" class="testimonial-card__icon">
-      </div>
-      <div class="testimonial-card testimonial-card--pink">
-        <p class="testimonial-card__text">"הגעתי סקפטית. חשבתי שזה יהיה מביך לדבר על גיל המעבר עם הקולגות שלי למשרד. אבל תוך עשר דקות, המבוכה התחלפה באנחת רווחה ענקית. פתאום הבנתי שאני לא 'משתגעת', ושאני לא לבד. האווירה הייתה רכה, מכילה ומאוד מכבדת. יצאתי עם ידע שנתן לי המון שקט נפשי, ובעיקר עם תחושת שייכות. זה היה כמו אי של שפיות בתוך המירוץ המטורף של העבודה והבית." – רונית, 52, מנהלת חשבונות</p>
-        <img src="{% static 'yoga/images/icon-quotes-pink.svg' %}" alt="" class="testimonial-card__icon">
-      </div>
-      <div class="testimonial-card testimonial-card--border">
-        <p class="testimonial-card__text">"סוף סוף מישהי עשתה לי סדר בראש. קיבלתי כלים פשוטים שעוזרים לי להתמודד עם העייפות והשינויים, והכל הועבר בצורה רכה, חכמה ובגובה העיניים." – רונית, חשבת שכר</p>
-        <img src="{% static 'yoga/images/icon-quotes-dark.svg' %}" alt="" class="testimonial-card__icon">
-      </div>
-      <div class="testimonial-card testimonial-card--teal">
-        <p class="testimonial-card__text">"בתור מנהלת, התרגלתי לשים מסכה ולהתעלם ממה שעובר עליי. הייתי יושבת בישיבות, מרגישה את גלי החום עולים, ורק מתפללת שזה ייגמר. הסדנה הזו הייתה הפעם הראשונה שעצרתי לנשום. הופתעתי לגלות כמה כוח יש במפגש נשי בתוך הארגון. זה לא היה רק 'שיח בנות', אלא קיבלתי כלים פרקטיים לניהול האנרגיה שלי במהלך יום עבודה. יצאתי בתחושה שאני לא צריכה להתנצל על הגוף שלי, אלא ללמוד לעבוד איתו. חובה לכל ארגון שמכבד את העובדות שלו." – יעל, 48, מנהלת משאבי אנוש</p>
-        <img src="{% static 'yoga/images/icon-quotes-teal.svg' %}" alt="" class="testimonial-card__icon">
-      </div>
+      {% endfor %}
     </div>
   </section>
 
@@ -375,10 +358,12 @@
   var total = quotes.length;
   var currentIndex = 0;
   var wrap = section.querySelector('.section-6__track-wrap');
+  var isRtl = document.documentElement.dir === 'rtl' || getComputedStyle(section).direction === 'rtl';
   function goTo(index) {
     currentIndex = (index + total) % total;
     if (currentIndex < 0) currentIndex += total;
-    track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+    var percent = currentIndex * 100;
+    track.style.transform = isRtl ? 'translateX(' + percent + '%)' : 'translateX(-' + percent + '%)';
     quotes.forEach(function(q, i) {
       q.classList.toggle('section-6__quote--active', i === currentIndex);
     });
