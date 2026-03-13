@@ -3,3 +3,4 @@ Pillow>=10.0
 gunicorn
 whitenoise
 dj-database-url
+psycopg[binary]
