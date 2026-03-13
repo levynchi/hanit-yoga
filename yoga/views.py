@@ -1,7 +1,7 @@
 from pathlib import Path
 from django.conf import settings as django_settings
 from django.shortcuts import render
-from .models import SiteSettings, HomePage
+from .models import SiteSettings, HomePage, HomePageQuote
 
 
 def _static_images_dir():
@@ -9,7 +9,8 @@ def _static_images_dir():
 
 
 def _find_hero_banner(img_dir):
-    for ext in ("jpg", "png", "webp"):
+    # Prefer PNG (Figma export = HERO BANNER MOBILE 210:41580), then jpg, webp
+    for ext in ("png", "jpg", "webp"):
         path = img_dir / f"hero-banner.{ext}"
         if path.exists():
             return f"yoga/images/hero-banner.{ext}"
@@ -23,9 +24,11 @@ def home(request):
     has_logo_png = (img_dir / "logo.png").exists()
     has_header_png = (img_dir / "header.png").exists()
     hero_banner_file = _find_hero_banner(img_dir)
+    quotes = list(HomePageQuote.objects.all())
     context = {
         "site_settings": site_settings,
         "homepage": homepage,
+        "section6_quotes": quotes,
         "use_figma_logo": has_logo_png or has_header_png,
         "figma_logo_file": "yoga/images/logo.png" if has_logo_png else "yoga/images/header.png" if has_header_png else None,
         "figma_logo_crop": has_header_png and not has_logo_png,

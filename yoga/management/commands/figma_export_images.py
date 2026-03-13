@@ -25,13 +25,24 @@ from django.conf import settings
 
 FIGMA_FILE_KEY = "I8MWlb1THJeTQb81HP9y6R"
 HERO_BANNER_NODE = "49:136"
-# Node IDs from Figma (HEADER DESKTOP, LOGO, HERO BANNER)
-NODE_IDS = ["49:133", "49:134", HERO_BANNER_NODE]
-OUTPUT_NAMES = {
-    "49:133": "header.png",
-    "49:134": "logo.png",
-    HERO_BANNER_NODE: "hero-banner.png",
-}
+# Use mobile hero for both desktop and mobile (set to mobile frame node ID from Figma)
+# Run: python manage.py figma_export_images --list-nodes  to find mobile hero frame ID
+HERO_BANNER_MOBILE_NODE = "210:41580"  # HERO BANNER MOBILE – used for hero-banner.png (desktop + mobile)
+# Node IDs from Figma (HEADER DESKTOP, LOGO, HERO BANNER – hero uses mobile if HERO_BANNER_MOBILE_NODE set)
+def _hero_node():
+    return HERO_BANNER_MOBILE_NODE or HERO_BANNER_NODE
+
+
+def _node_ids():
+    return ["49:133", "49:134", _hero_node()]
+
+
+def _output_names():
+    return {
+        "49:133": "header.png",
+        "49:134": "logo.png",
+        _hero_node(): "hero-banner.png",
+    }
 
 
 def _load_token_from_env_file():
@@ -117,6 +128,11 @@ class Command(BaseCommand):
             action="store_true",
             help="Download hero background as raw image file (no Figma effects/filters)",
         )
+        parser.add_argument(
+            "--list-nodes",
+            action="store_true",
+            help="List all frame nodes (id + name) in the Figma file to find mobile hero node ID",
+        )
 
     def handle(self, *args, **options):
         token = options["token"] or os.environ.get("FIGMA_ACCESS_TOKEN") or _load_token_from_env_file()
@@ -129,6 +145,9 @@ class Command(BaseCommand):
         static_dir = Path(settings.BASE_DIR) / "yoga" / "static" / "yoga" / "images"
         static_dir.mkdir(parents=True, exist_ok=True)
 
+        if options.get("list_nodes"):
+            self._list_nodes(token)
+            return
         if options["hero_raw_image"]:
             self._export_hero_raw_image(token, static_dir)
             return
@@ -136,7 +155,9 @@ class Command(BaseCommand):
             self._export_hero_background_only(token, static_dir)
             return
 
-        ids_param = ",".join(NODE_IDS)
+        node_ids = _node_ids()
+        output_names = _output_names()
+        ids_param = ",".join(node_ids)
         url = (
             f"https://api.figma.com/v1/images/{FIGMA_FILE_KEY}"
             f"?ids={ids_param}&format=png"
@@ -166,7 +187,7 @@ class Command(BaseCommand):
             if not download_url:
                 self.stdout.write(f"Skip (no URL): {node_id}")
                 continue
-            name = OUTPUT_NAMES.get(node_id, node_id.replace(":", "-") + ".png")
+            name = output_names.get(node_id, node_id.replace(":", "-") + ".png")
             path = static_dir / name
             try:
                 urllib.request.urlretrieve(download_url, path)
@@ -177,10 +198,33 @@ class Command(BaseCommand):
 
         self.stdout.write(f"Done. {saved} image(s) saved to {static_dir}")
 
+    def _walk_frames(self, node, depth=0):
+        """Recursively yield (id, name) for every FRAME node."""
+        if node.get("type") == "FRAME":
+            yield (node.get("id", ""), node.get("name", ""))
+        for child in node.get("children") or []:
+            yield from self._walk_frames(child, depth + 1)
+
+    def _list_nodes(self, token):
+        """List all FRAME nodes in the file so user can find mobile hero node ID."""
+        url = f"https://api.figma.com/v1/files/{FIGMA_FILE_KEY}?depth=6"
+        try:
+            data = _request(token, url)
+        except Exception as e:
+            self.stderr.write(f"Failed to get file: {e}")
+            return
+        doc = data.get("document") or {}
+        self.stdout.write("Frame nodes (id, name) – use id for HERO_BANNER_MOBILE_NODE:\n")
+        for page in doc.get("children") or []:
+            for nid, name in self._walk_frames(page):
+                self.stdout.write(f"  {nid}  {name}")
+        self.stdout.write("\nCurrent hero node for export: " + _hero_node())
+
     def _export_hero_background_only(self, token, static_dir):
         """Export only the bottom layer of HERO BANNER (background image, no overlay)."""
+        hero_node = _hero_node()
         try:
-            bg_id = _find_background_child(token, FIGMA_FILE_KEY, HERO_BANNER_NODE)
+            bg_id = _find_background_child(token, FIGMA_FILE_KEY, hero_node)
         except urllib.error.HTTPError as e:
             self.stderr.write(f"Figma API error: {e.code} {e.reason}")
             return
@@ -191,11 +235,11 @@ class Command(BaseCommand):
         if not bg_id:
             self.stderr.write(
                 "Could not find background layer under HERO BANNER. "
-                "Check node structure in Figma."
+                "Check node structure in Figma. Run --list-nodes to see frame IDs."
             )
             return
 
-        self.stdout.write(f"Exporting hero background node: {bg_id}")
+        self.stdout.write(f"Exporting hero background node: {bg_id} (from frame {hero_node})")
         url = (
             f"https://api.figma.com/v1/images/{FIGMA_FILE_KEY}"
             f"?ids={urllib.parse.quote(bg_id)}&format=png"
@@ -224,10 +268,11 @@ class Command(BaseCommand):
 
     def _export_hero_raw_image(self, token, static_dir):
         """Download the raw image used in hero (image fill), no Figma effects."""
+        hero_node = _hero_node()
         # 1) Get hero subtree to find imageRef
         url_nodes = (
             f"https://api.figma.com/v1/files/{FIGMA_FILE_KEY}/nodes"
-            f"?ids={urllib.parse.quote(HERO_BANNER_NODE)}&depth=4"
+            f"?ids={urllib.parse.quote(hero_node)}&depth=4"
         )
         req = urllib.request.Request(url_nodes, method="GET")
         req.add_header("X-Figma-Token", token)
@@ -238,7 +283,7 @@ class Command(BaseCommand):
             self.stderr.write(f"Failed to get file nodes: {e}")
             return
         nodes = data.get("nodes") or {}
-        frame_data = nodes.get(HERO_BANNER_NODE)
+        frame_data = nodes.get(hero_node)
         if not frame_data:
             self.stderr.write("Hero banner node not found.")
             return

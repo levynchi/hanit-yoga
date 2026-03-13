@@ -36,7 +36,7 @@ class HomePage(models.Model):
         default='"אם היית פרח"',
     )
     hero_overlay_text = models.TextField(
-        default='סדנה נשית חוויתית ומקצועית ומותאמת לעולם הארגוני',
+        default='סדנה נשית\nחוויתית ומקצועית לגיל 40 +\nמותאמת לעולם הארגוני',
     )
     hero_overlay_image = models.ImageField(
         upload_to='hero/',
@@ -54,6 +54,15 @@ class HomePage(models.Model):
     )
     hero_cta_link = models.URLField(blank=True, default='#contact')
 
+    # Editable images only (admin); text/overlay stay in code
+    section2_image = models.ImageField(upload_to='homepage/section2/', blank=True, null=True)
+    section3_image_1 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
+    section3_image_2 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
+    section3_image_3 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
+    section3_image_4 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
+    section4_image = models.ImageField(upload_to='homepage/section4/', blank=True, null=True)
+    facilitators_image = models.ImageField(upload_to='homepage/facilitators/', blank=True, null=True)
+
     class Meta:
         verbose_name = 'דף בית'
         verbose_name_plural = 'דף בית'
@@ -65,3 +74,17 @@ class HomePage(models.Model):
 
     def __str__(self):
         return 'דף בית'
+
+
+class HomePageQuote(models.Model):
+    """ציטוט לסקשן 6 (קרוסלת משפטים)."""
+    text = models.TextField(verbose_name='משפט')
+    order = models.PositiveSmallIntegerField(default=0, verbose_name='סדר')
+
+    class Meta:
+        ordering = ['order', 'pk']
+        verbose_name = 'ציטוט (סקשן 6)'
+        verbose_name_plural = 'ציטוטים (סקשן 6)'
+
+    def __str__(self):
+        return (self.text[:50] + '…') if len(self.text) > 50 else self.text

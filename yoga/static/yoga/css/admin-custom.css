@@ -1,0 +1,116 @@
+:root {
+  /* פלטת צבעי האתר */
+  --admin-color-primary: #008F8C;
+  --admin-color-primary-dark: #007270;
+  --admin-color-pink: #EEA7A9;
+  --admin-color-pink-light: #FACFCF;
+  --admin-color-turquoise-light: #D1EEEE;
+  --admin-color-bg: #FFFEFE;
+
+  /* משתני האדמין של Django – מפנים לצבעי האתר */
+  --header-bg: var(--admin-color-primary);
+  --header-link-color: #ffffff;
+  --header-color: #ffffff;
+  --body-bg: var(--admin-color-bg);
+  --body-fg: #333;
+  --primary: var(--admin-color-primary);
+  --secondary: var(--admin-color-primary-dark);
+  --accent: var(--admin-color-pink);
+  --link-fg: var(--admin-color-primary);
+  --link-hover-color: var(--admin-color-primary-dark);
+  --button-bg: var(--admin-color-primary);
+  --button-hover-bg: var(--admin-color-primary-dark);
+  --default-button-bg: var(--admin-color-primary);
+  --breadcrumbs-bg: var(--admin-color-turquoise-light);
+  --breadcrumbs-link-fg: var(--admin-color-primary);
+  --breadcrumbs-fg: var(--admin-color-primary-dark);
+  --selected-bg: var(--admin-color-pink-light);
+  --selected-row: var(--admin-color-turquoise-light);
+}
+
+/* רקע הכותרת העליונה של האדמין */
+#header {
+  background: var(--admin-color-primary);
+  border-bottom: 3px solid var(--admin-color-pink);
+}
+
+#header #branding h1,
+#header #branding h1 a,
+#header #branding h1 a:link,
+#header #branding h1 a:visited {
+  color: #ffffff;
+}
+
+/* לינקים ראשיים בתפריט העליון */
+#user-tools a,
+#user-tools a:link,
+#user-tools a:visited {
+  color: #ffffff;
+}
+
+#user-tools a:hover {
+  text-decoration: underline;
+}
+
+/* כפתורים מרכזיים בצבע הירוק של האתר */
+.button,
+.submit-row input,
+input[type=submit],
+input[type=button],
+.default {
+  background: var(--admin-color-primary);
+  border-color: var(--admin-color-primary-dark);
+  color: #ffffff;
+}
+
+.button:hover,
+.submit-row input:hover,
+input[type=submit]:hover,
+input[type=button]:hover,
+.default:hover {
+  background: var(--admin-color-primary-dark);
+}
+
+/* רקע כללי כדי להתאים לאתר */
+body {
+  background-color: var(--admin-color-bg);
+}
+
+/* כותרות fieldsets ומודולים – בסגנון האתר */
+fieldset .fieldset-heading,
+fieldset .inline-heading,
+:not(.inline-related) .collapse summary,
+.module h2,
+.module caption {
+  background: var(--admin-color-primary) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--admin-color-primary-dark);
+  margin: 0;
+  padding: 8px;
+  font-weight: 400;
+  font-size: 0.8125rem;
+}
+
+/* כותרות טבלאות */
+#result_list thead th {
+  background: var(--admin-color-turquoise-light);
+  color: var(--admin-color-primary-dark);
+}
+
+/* לינקים באדמין */
+#content a:link,
+#content a:visited {
+  color: var(--admin-color-primary);
+}
+
+#content a:hover {
+  color: var(--admin-color-primary-dark);
+}
+
+/* לינק היסטוריה – טקסט בשחור (דורס את .object-tools a) */
+.object-tools a.historylink,
+.object-tools a.historylink:link,
+.object-tools a.historylink:visited {
+  color: #000000 !important;
+}
+

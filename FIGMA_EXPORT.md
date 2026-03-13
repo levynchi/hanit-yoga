@@ -36,4 +36,12 @@
    (אם הטוקן ב-`.env`, אין צורך ב-`--token`.)
    - הפקודה מחפשת את השכבה התחתונה (רקע) בתוך פריים ה-HERO BANNER ומייצאת רק אותה ל-`hero-banner.png`.
 
-**הערה:** קובץ הפיגמה והצמתים (node IDs) מקושרים ל-PROJECT-1 (הדר + באנר דסקטופ). אם העיצוב השתנה, ייתכן שיהיה צורך לעדכן את המזהים ב-`yoga/management/commands/figma_export_images.py`.
+6. **שימוש בבאנר מובייל גם לדסקטופ**
+   - כברירת מחדל מייצאים את תמונת הבאנר מהפריים של המובייל (נשמרת כ־`hero-banner.png` ומשמשת גם בדסקטופ וגם במובייל).
+   - מזהה הפריים של המובייל מוגדר ב־`HERO_BANNER_MOBILE_NODE` בקובץ `figma_export_images.py`. לשינוי (למשל אם יש פריים אחר למובייל):
+   ```bash
+   .\.venv\Scripts\python manage.py figma_export_images --list-nodes
+   ```
+   - הפקודה מדפיסה את כל הפריימים בקובץ הפיגמה (id + name). העתיקי את ה־id של פריים הבאנר במובייל ועדכני את `HERO_BANNER_MOBILE_NODE` ב־`yoga/management/commands/figma_export_images.py`.
+
+**הערה:** קובץ הפיגמה והצמתים (node IDs) מקושרים ל-PROJECT-1 (הדר + באנר). אם העיצוב השתנה, ייתכן שיהיה צורך לעדכן את המזהים ב-`yoga/management/commands/figma_export_images.py`.
