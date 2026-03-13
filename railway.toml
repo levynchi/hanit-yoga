@@ -1,0 +1,3 @@
+# Railway deploy config – start command runs migrate + collectstatic then gunicorn
+[deploy]
+startCommand = "bash start.sh"
