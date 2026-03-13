@@ -233,7 +233,6 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto;
-  height: 500px;
   max-width: var(--max-width);
   margin: 0 auto;
 }
@@ -1013,7 +1012,54 @@ body {
   margin: 0;
 }
 
-/* ========== MOBILE / TABLET (max-width: 768px) ========== */
+/* ========== TABLET (769px – 1076px): circles 3+2 layout ========== */
+@media (min-width: 769px) and (max-width: 1076px) {
+  .section-2__circles-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 19px;
+    max-width: 638px; /* 200*3 + 19*2 – 3 circles per row, 2 centered below */
+    margin: 0 auto;
+    overflow: visible;
+    width: 100%;
+    scroll-snap-type: none;
+    padding: 0;
+  }
+
+  .section-2__circles-dots {
+    display: none;
+  }
+
+  .circle-item {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    scroll-snap-align: unset;
+    padding: 40px 10px 20px;
+  }
+
+  .circle-item__text {
+    font-size: 15px;
+  }
+
+  .circle-item__icon {
+    width: 40px;
+    height: 32px;
+  }
+
+  /* Section 5 – tablet: no padding, smaller photo */
+  .section-5 {
+    padding: 0;
+  }
+
+  .section-5__photo {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* ========== MOBILE (max-width: 768px) ========== */
 @media (max-width: 768px) {
   /* Header – mobile: column – logo on top, tagline below */
   .site-header {
