@@ -7,7 +7,8 @@ from pathlib import Path
 import dj_database_url
 from .base import *
 
-DEBUG = False
+# Set DJANGO_DEBUG=1 in Railway Variables to show debug pages (disable after debugging)
+DEBUG = os.environ.get('DJANGO_DEBUG', 'false').lower() in ('1', 'true', 'yes')
 
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 if not SECRET_KEY:
