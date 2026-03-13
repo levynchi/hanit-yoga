@@ -30,7 +30,12 @@ class SiteSettings(models.Model):
 
 class HomePage(models.Model):
     """Singleton: hero section content."""
-    hero_image = models.ImageField(upload_to='hero/', blank=True, null=True)
+    hero_image = models.ImageField(
+        upload_to='hero/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: 1920×1080 פיקסלים (באנר רוחב מלא, גובה 660px באתר).',
+    )
     hero_overlay_title = models.CharField(
         max_length=200,
         default='"אם היית פרח"',
@@ -42,7 +47,7 @@ class HomePage(models.Model):
         upload_to='hero/',
         blank=True,
         null=True,
-        help_text='Flower image',
+        help_text='תמונת פרח. מומלץ: 80×80 עד 160×160 פיקסלים.',
     )
     hero_subtitle = models.CharField(
         max_length=300,
@@ -55,17 +60,52 @@ class HomePage(models.Model):
     hero_cta_link = models.URLField(blank=True, default='#contact')
 
     # Editable images only (admin); text/overlay stay in code
-    section2_image = models.ImageField(upload_to='homepage/section2/', blank=True, null=True)
-    section3_image_1 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
-    section3_image_2 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
-    section3_image_3 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
-    section3_image_4 = models.ImageField(upload_to='homepage/section3/', blank=True, null=True)
-    section4_image = models.ImageField(upload_to='homepage/section4/', blank=True, null=True)
-    facilitators_image = models.ImageField(upload_to='homepage/facilitators/', blank=True, null=True)
+    section2_image = models.ImageField(
+        upload_to='homepage/section2/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: כ־800×1000 פיקסלים (חצי רוחב המסך, גובה חופשי).',
+    )
+    section3_image_1 = models.ImageField(
+        upload_to='homepage/section3/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: 250×250 פיקסלים (יוצג כעיגול 214×214).',
+    )
+    section3_image_2 = models.ImageField(
+        upload_to='homepage/section3/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: 250×250 פיקסלים (יוצג כעיגול 214×214).',
+    )
+    section3_image_3 = models.ImageField(
+        upload_to='homepage/section3/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: 250×250 פיקסלים (יוצג כעיגול 214×214).',
+    )
+    section3_image_4 = models.ImageField(
+        upload_to='homepage/section3/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: 250×250 פיקסלים (יוצג כעיגול 214×214).',
+    )
+    section4_image = models.ImageField(
+        upload_to='homepage/section4/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: 720×500 פיקסלים (חצי רוחב, גובה 500px באתר).',
+    )
+    facilitators_image = models.ImageField(
+        upload_to='homepage/facilitators/',
+        blank=True,
+        null=True,
+        help_text='מומלץ: 400×400 פיקסלים (יוצג כעיגול 358×358).',
+    )
 
     class Meta:
-        verbose_name = 'דף בית'
-        verbose_name_plural = 'דף בית'
+        verbose_name = 'תמונות דף הבית'
+        verbose_name_plural = 'תמונות דף הבית'
 
     @classmethod
     def get_singleton(cls):

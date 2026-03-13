@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib.staticfiles.storage import staticfiles_storage
+from django.shortcuts import redirect
+from django.urls import reverse
 from django.utils.html import format_html
 from .models import SiteSettings, HomePage, HomePageQuote
 
@@ -14,6 +16,11 @@ except Exception:
 @admin.register(HomePage)
 class HomePageAdmin(admin.ModelAdmin):
     list_display = ('id', 'hero_image_preview_admin',)
+
+    def changelist_view(self, request, extra_context=None):
+        """Redirect /admin/yoga/homepage/ directly to the singleton's change form."""
+        obj, _ = HomePage.objects.get_or_create(pk=1)
+        return redirect(reverse('admin:yoga_homepage_change', args=[obj.pk]))
     readonly_fields = (
         'hero_image_preview',
         'section2_image_preview',

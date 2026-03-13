@@ -21,7 +21,7 @@
   --button-bg: var(--admin-color-primary);
   --button-hover-bg: var(--admin-color-primary-dark);
   --default-button-bg: var(--admin-color-primary);
-  --breadcrumbs-bg: var(--admin-color-turquoise-light);
+  --breadcrumbs-bg: var(--admin-color-pink);
   --breadcrumbs-link-fg: var(--admin-color-primary);
   --breadcrumbs-fg: var(--admin-color-primary-dark);
   --selected-bg: var(--admin-color-pink-light);
@@ -95,6 +95,15 @@ fieldset .inline-heading,
 #result_list thead th {
   background: var(--admin-color-turquoise-light);
   color: var(--admin-color-primary-dark);
+}
+
+/* Breadcrumbs – רקע ורוד */
+.breadcrumbs {
+  background: #eea7a9;
+  padding: 10px 40px;
+  border: none;
+  color: var(--breadcrumbs-fg);
+  text-align: left;
 }
 
 /* לינקים באדמין */

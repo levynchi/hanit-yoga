@@ -928,13 +928,16 @@ body {
   max-width: none;
 }
 
-.site-footer__main {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  padding: 45px 60px;
-  max-width: var(--max-width);
-  margin: 0 auto;
+/* Footer main – דסקטופ וטאבלט */
+@media (min-width: 769px) {
+  .site-footer__main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 45px 60px;
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
 }
 
 .site-footer__logo-wrap {
@@ -947,9 +950,9 @@ body {
 }
 
 .site-footer__logo {
-  width: 149px;
+  width: 220px;
   height: auto;
-  max-height: 102px;
+  /* max-height: 102px; */
   object-fit: contain;
 }
 
@@ -971,7 +974,7 @@ body {
 .site-footer__line {
   font-family: var(--font-family);
   font-weight: 700;
-  font-size: 32px;
+  font-size: 24px;
   line-height: 35px;
   color: var(--color-text);
   margin: 0;
@@ -988,8 +991,8 @@ body {
 }
 
 .site-footer__social-link img {
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   object-fit: contain;
 }
 
@@ -1001,7 +1004,7 @@ body {
 }
 
 .site-footer__credit {
-  padding: 10px;
+  padding: 20px;
   text-align: center;
 }
 
@@ -1106,7 +1109,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: none;
-    gap: 0;
+    gap: 10px;
   }
 
   .section-7__grid .testimonial-card:nth-child(1),
@@ -1121,6 +1124,12 @@ body {
   .section-7__grid .testimonial-card:nth-child(3),
   .section-7__grid .testimonial-card:nth-child(6) {
     display: none;
+  }
+
+  .testimonial-card__text {
+    font-size: 15px;
+    line-height: 1.4;
+    min-width: 0;
   }
 
   /* Section 3 – טאבלט: רווח 30px, תמונות 190px */
@@ -1346,7 +1355,7 @@ body {
 
   /* Section 3 */
   .section-3 {
-    padding-bottom: 5px;
+    padding-bottom: 0;
   }
 
   .section-3__belt {
@@ -1530,7 +1539,7 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: none;
-    gap: 0;
+    gap: 10px;
     width: 100%;
     min-width: 0;
     max-width: 100%;
@@ -1559,7 +1568,7 @@ body {
   }
 
   .testimonial-card__text {
-    font-size: 11px;
+    font-size: 15px;
     line-height: 1.4;
     min-width: 0;
   }
@@ -1589,8 +1598,18 @@ body {
     max-width: 320px;
   }
 
-  /* Footer – מובייל כמו בפיגמה: לוגו למעלה, פרטי קשר, אייקונים, קרדיט */
+  .section-8__field--message {
+    min-height: 200px;
+  }
+
+  .section-8__input,
+  .section-8__textarea {
+    padding: 0;
+  }
+
+  /* Footer – מובייל: לוגו ראשון למעלה, אחריו פרטי קשר ואייקונים */
   .site-footer__main {
+    display: flex;
     flex-direction: column;
     align-items: center;
     padding: 32px 20px;
@@ -1626,7 +1645,8 @@ body {
   }
 
   .site-footer__logo {
-    width: 100px;
-    max-height: 68px;
+    width: 150px;
+    height: auto;
+    /* max-height: 68px; */
   }
 }
