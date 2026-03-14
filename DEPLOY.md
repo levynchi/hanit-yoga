@@ -32,6 +32,17 @@
 - **Migrations**: Run in build or as a release command, e.g. `python manage.py migrate --noinput`.
 - **Static files**: `python manage.py collectstatic --noinput` should run in build (or add to start script). WhiteNoise serves them in production.
 
+## Create superuser (first deploy)
+
+Because `postgres.railway.internal` is only reachable from inside Railway, you cannot run `createsuperuser` from your local machine. Use optional env vars so the app creates a superuser on startup:
+
+1. In the **web** service → **Variables**, add (temporarily):
+   - `DJANGO_SUPERUSER_USERNAME` = your admin username
+   - `DJANGO_SUPERUSER_EMAIL` = your email
+   - `DJANGO_SUPERUSER_PASSWORD` = your password
+2. Redeploy (or push a commit). On startup, the app will run `createsuperuser --noinput` once.
+3. After logging in to `/admin/`, **remove** these variables (especially the password) from Railway Variables and redeploy.
+
 ## After deploy
 
 - Generate a **public domain** in the app service (Settings → Networking).
