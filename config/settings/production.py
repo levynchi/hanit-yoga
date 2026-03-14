@@ -18,6 +18,14 @@ if not SECRET_KEY:
 allowed_hosts_env = os.environ.get('ALLOWED_HOSTS', '.railway.app,localhost')
 ALLOWED_HOSTS = [h.strip() for h in allowed_hosts_env.split(',') if h.strip()]
 
+# CSRF trusted origins for HTTPS (required for admin login behind proxy)
+CSRF_TRUSTED_ORIGINS = []
+if os.environ.get('RAILWAY_PUBLIC_DOMAIN'):
+    CSRF_TRUSTED_ORIGINS.append(f'https://{os.environ["RAILWAY_PUBLIC_DOMAIN"]}')
+    CSRF_TRUSTED_ORIGINS.append(f'http://{os.environ["RAILWAY_PUBLIC_DOMAIN"]}')
+csrf_origins_env = os.environ.get('CSRF_TRUSTED_ORIGINS', '')
+CSRF_TRUSTED_ORIGINS.extend(o.strip() for o in csrf_origins_env.split(',') if o.strip())
+
 # PostgreSQL from Railway DATABASE_URL
 DATABASES = {
     'default': dj_database_url.config(
