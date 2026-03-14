@@ -34,14 +34,12 @@
 
 ## Create superuser (first deploy)
 
-Because `postgres.railway.internal` is only reachable from inside Railway, you cannot run `createsuperuser` from your local machine. Use optional env vars so the app creates a superuser on startup:
+Run `createsuperuser` **inside** the Railway container (so the app can reach Postgres):
 
-1. In the **web** service → **Variables**, add (temporarily):
-   - `DJANGO_SUPERUSER_USERNAME` = your admin username
-   - `DJANGO_SUPERUSER_EMAIL` = your email
-   - `DJANGO_SUPERUSER_PASSWORD` = your password
-2. Redeploy (or push a commit). On startup, the app will run `createsuperuser --noinput` once.
-3. After logging in to `/admin/`, **remove** these variables (especially the password) from Railway Variables and redeploy.
+1. From your project directory: `railway link` → select project and **web** service.
+2. Run `railway ssh` to open a shell inside the web container.
+3. In that shell: `python manage.py createsuperuser` and enter username, email, password.
+4. Type `exit` to leave the SSH session.
 
 ## After deploy
 
