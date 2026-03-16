@@ -1355,9 +1355,9 @@ body {
   .circle-item {
     flex-shrink: 0;
     scroll-snap-align: center;
-    width: 160px;
-    height: 160px;
-    padding: 24px 8px 16px;
+    width: 185px;
+    height: 185px;
+    padding: 28px 10px 18px;
   }
 
   .circle-item__text {
@@ -1365,8 +1365,8 @@ body {
   }
 
   .circle-item__icon {
-    width: 32px;
-    height: 26px;
+    width: 36px;
+    height: 30px;
   }
 
   /* Circles carousel dots (mobile only) */
