@@ -142,6 +142,16 @@ class HomePageQuoteAdmin(admin.ModelAdmin):
     text_short.short_description = 'משפט'
 
 
+SECTION7_CHAR_LIMITS = {
+    1: 200,
+    2: 360,
+    3: 0,    # כרטיס לבן – ללא טקסט
+    4: 400,
+    5: 180,
+    6: 450,
+}
+
+
 class Section7TestimonialForm(forms.ModelForm):
     """מציג את טקסט ברירת המחדל בשדה כשהטקסט ריק – המשתמש יכול למחוק ולכתוב חדש."""
 
@@ -157,6 +167,18 @@ class Section7TestimonialForm(forms.ModelForm):
                 default = SECTION7_DEFAULT_TEXTS[order - 1]
                 self.initial['text'] = default
 
+        order = getattr(self.instance, 'order', None)
+        limit = SECTION7_CHAR_LIMITS.get(order)
+        if limit == 0:
+            self.fields['text'].help_text = '⚠️ כרטיס לבן – יש להשאיר ריק (ללא טקסט).'
+            self.fields['text'].widget.attrs['maxlength'] = 0
+        elif limit:
+            self.fields['text'].help_text = (
+                f'עד {limit} תווים כדי שהטקסט לא ייחתך בעיצוב הדסקטופ '
+                f'(כרטיס {order} – {limit} תווים מקסימום).'
+            )
+            self.fields['text'].widget.attrs['maxlength'] = limit
+
 
 @admin.register(Section7Testimonial)
 class Section7TestimonialAdmin(admin.ModelAdmin):
@@ -165,6 +187,12 @@ class Section7TestimonialAdmin(admin.ModelAdmin):
     list_display_links = ('text_short',)
     list_editable = ('order',)
     ordering = ('order', 'pk')
+
+    def has_add_permission(self, request):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
     def text_short(self, obj):
         if not obj.text or not obj.text.strip():

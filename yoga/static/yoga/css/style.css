@@ -383,7 +383,7 @@ body {
   display: flex;
   flex-direction: column;
   background: var(--color-turquoise-light);
-  padding-bottom: 170px;
+  padding-bottom: 115px;
 }
 
 .section-3__content {
@@ -447,6 +447,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: start;
+  padding-inline-start: 6%;
+  padding-inline-end: 2%;
   gap: 10px;
 }
 
@@ -840,7 +842,7 @@ body {
 /* ========== SECTION 8 - Contact form ========== */
 .section-8 {
   background: var(--color-primary);
-  padding: 80px;
+  padding: 50px 80px;
   max-width: none;
 }
 
@@ -855,11 +857,11 @@ body {
 }
 
 .section-8__form {
-  max-width: 700px;
+  max-width: 630px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 12px;
 }
 
 .section-8__field {
@@ -871,7 +873,7 @@ body {
 }
 
 .section-8__field--message {
-  min-height: 250px;
+  min-height: 160px;
 }
 
 .section-8__label {
@@ -906,20 +908,36 @@ body {
 }
 
 .section-8__textarea {
-  min-height: 200px;
+  min-height: 130px;
   resize: vertical;
 }
 
 .section-8__submit {
   align-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 281px;
   padding: 13px 32px;
-  background: var(--color-near-white);
+  background: #ffffff;
   color: var(--color-primary);
   font-family: var(--font-family);
   font-weight: 700;
   font-size: 32px;
+  line-height: 35px;
   border: none;
   cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.section-8__submit:hover {
+  background: #d9d9d9;
+  color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 114, 112, 0.15);
+}
+
+.section-8__submit:active {
+  opacity: 0.95;
 }
 
 /* ========== FOOTER ========== */
@@ -930,11 +948,26 @@ body {
 
 /* Footer main – דסקטופ וטאבלט */
 @media (min-width: 769px) {
+  .section-3__col--right {
+    gap: 6px;
+  }
+
+  .section-3__intro {
+    line-height: 1.4;
+  }
+
+  .section-3__list li {
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+}
+
+@media (min-width: 769px) {
   .site-footer__main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 45px 60px;
+    padding: 36px 60px;
     max-width: var(--max-width);
     margin: 0 auto;
   }
@@ -950,7 +983,7 @@ body {
 }
 
 .site-footer__logo {
-  width: 220px;
+  width: 198px;
   height: auto;
   /* max-height: 102px; */
   object-fit: contain;
@@ -960,7 +993,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 70px;
+  gap: 40px;
   max-width: 717px;
 }
 
@@ -968,13 +1001,13 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 30px;
+  gap: 15px;
 }
 
 .site-footer__line {
   font-family: var(--font-family);
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: 600;
+  font-size: 20px;
   line-height: 35px;
   color: var(--color-text);
   margin: 0;
@@ -991,8 +1024,8 @@ body {
 }
 
 .site-footer__social-link img {
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   object-fit: contain;
 }
 
@@ -1363,7 +1396,7 @@ body {
   }
 
   .section-3__belt {
-    padding-bottom: 100px;
+    padding-bottom: 0px;
   }
 
   .section-3__content {
@@ -1408,36 +1441,25 @@ body {
     bottom: 0;
     left: 0;
     flex-wrap: nowrap;
-    gap: 24px;
-    justify-content: flex-start;
-    padding: 24px 16px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 16px;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  .section-3__images::-webkit-scrollbar {
-    display: none;
+    gap: 12px;
+    justify-content: center;
+    padding: 16px 0;
+    overflow: hidden;
   }
 
   .section-3__round-img {
-    width: 120px;
-    height: 120px;
+    width: 130px;
+    height: 130px;
     flex-shrink: 0;
-    scroll-snap-align: center;
   }
 
-  /* Section 3 carousel dots (mobile only) */
+  .section-3__round-img:nth-child(4) {
+    display: none;
+  }
+
+  /* Section 3 carousel dots – מוסתרים במובייל (אין קרוסלה) */
   .section-3__dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
-    padding: 16px 0 0;
+    display: none;
   }
 
   .section-3__dot {
@@ -1646,6 +1668,11 @@ body {
   .site-footer__social {
     justify-content: center;
     gap: 24px;
+  }
+
+  .site-footer__social-link img {
+    width: 28px;
+    height: 28px;
   }
 
   .site-footer__logo {
