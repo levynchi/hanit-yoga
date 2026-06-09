@@ -1,0 +1,44 @@
+name: Weekly DB Backup
+
+# External, off-platform safety net for the Railway PostgreSQL database.
+# Runs pg_dump against Railway's public proxy URL and stores the dump as an
+# artifact. Requires a repository secret DATABASE_PUBLIC_URL (see BACKUPS.md).
+
+on:
+  schedule:
+    - cron: "0 3 * * 0" # Sundays 03:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  pg_dump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install PostgreSQL 17 client
+        run: |
+          sudo install -d /usr/share/postgresql-common/pgdg
+          curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc \
+            | sudo gpg --dearmor -o /usr/share/postgresql-common/pgdg/apt.postgresql.org.gpg
+          echo "deb [signed-by=/usr/share/postgresql-common/pgdg/apt.postgresql.org.gpg] https://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" \
+            | sudo tee /etc/apt/sources.list.d/pgdg.list > /dev/null
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
+
+      - name: Dump database
+        env:
+          DATABASE_PUBLIC_URL: ${{ secrets.DATABASE_PUBLIC_URL }}
+        run: |
+          if [ -z "$DATABASE_PUBLIC_URL" ]; then
+            echo "DATABASE_PUBLIC_URL secret is not set. See BACKUPS.md (Part C)." >&2
+            exit 1
+          fi
+          mkdir -p backups
+          stamp=$(date -u +%Y%m%d-%H%M%S)
+          pg_dump "$DATABASE_PUBLIC_URL" -Fc -f "backups/hanit-yoga-$stamp.dump"
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: db-backup
+          path: backups/*.dump
+          retention-days: 30
+          if-no-files-found: error
