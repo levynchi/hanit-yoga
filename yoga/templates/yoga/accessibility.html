@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>הצהרת נגישות – תבונת המעבר</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@400&family=M+PLUS+1p:wght@300;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'yoga/css/style.css' %}">
+  <style>
+    .a11y-page { max-width: 860px; margin: 0 auto; padding: 60px 32px; font-family: 'M PLUS 1', sans-serif; direction: rtl; text-align: right; }
+    .a11y-page h1 { font-family: 'M PLUS 1p', sans-serif; font-size: 36px; color: #007270; margin-bottom: 16px; }
+    .a11y-page h2 { font-family: 'M PLUS 1p', sans-serif; font-size: 22px; color: #007270; margin-top: 36px; margin-bottom: 10px; }
+    .a11y-page p, .a11y-page li { font-size: 17px; line-height: 1.8; color: #222; }
+    .a11y-page ul { padding-right: 24px; }
+    .a11y-page a { color: #008F8C; }
+    .a11y-page__back { display: inline-block; margin-bottom: 32px; color: #008F8C; font-weight: 700; text-decoration: none; font-size: 16px; }
+    .a11y-page__back:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <main id="main-content" class="a11y-page">
+    <a href="/" class="a11y-page__back">← חזרה לדף הבית</a>
+    <h1>הצהרת נגישות</h1>
+    <p>תבונת המעבר מחויבת לנגישות האתר עבור כלל המשתמשים, לרבות אנשים עם מוגבלויות, בהתאם לתקן הישראלי <strong>ת"י 5568</strong> ותקן WCAG 2.1 ברמה AA.</p>
+
+    <h2>רמת הנגישות</h2>
+    <p>אנו שואפים לעמוד ברמת נגישות AA לפי WCAG 2.1, ומתאמצים לוודא שהאתר נגיש לכלל המשתמשים.</p>
+
+    <h2>התאמות הנגישות באתר</h2>
+    <ul>
+      <li>ניתן להגדיל ולהקטין גודל הטקסט באמצעות תפריט הנגישות.</li>
+      <li>ניתן להפעיל מצב ניגודיות גבוהה.</li>
+      <li>ניתן להציג את האתר בגווני אפור.</li>
+      <li>ניתן להדגיש קישורים לנוחות ניווט.</li>
+      <li>קיים קישור "דלג לתוכן" בתחילת כל עמוד.</li>
+      <li>האתר תומך בניווט מקלדת מלא.</li>
+      <li>כל התמונות כוללות טקסט חלופי (alt).</li>
+      <li>שדות הטופס כוללים תוויות ברורות.</li>
+      <li>האתר בנוי ב-HTML סמנטי עם תפקידי ARIA מתאימים.</li>
+      <li>כיוון הטקסט באתר הוא מימין לשמאל (RTL) בהתאם לשפה העברית.</li>
+    </ul>
+
+    <h2>פרטי יצירת קשר בנושא נגישות</h2>
+    <p>נתקלתם בבעיית נגישות? אנו כאן לעזור:</p>
+    <ul>
+      <li>חנית רפאלי: <a href="tel:+972507755186">050-7755186</a></li>
+      <li>לימור אפורי: <a href="tel:+972504321288">050-4321288</a></li>
+      <li>דוא"ל: <a href="mailto:tvunat.hameaver@gmail.com">tvunat.hameaver@gmail.com</a></li>
+    </ul>
+
+    <h2>תאריך עדכון ההצהרה</h2>
+    <p>הצהרה זו עודכנה לאחרונה ביום <strong>מרץ 2025</strong>.</p>
+  </main>
+</body>
+</html>

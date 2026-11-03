@@ -11,7 +11,134 @@
     <link rel="stylesheet" href="{% static 'yoga/css/style.css' %}">
 </head>
 <body>
+    <!-- דלג לתוכן המרכזי -->
+    <a href="#main-content" class="a11y-skip-link">דלג לתוכן המרכזי</a>
+
     {% block content %}{% endblock %}
+
+    <!-- כפתור נגישות -->
+    <div class="a11y-widget" id="a11yWidget">
+      <div class="a11y-widget__panel" id="a11yPanel" role="dialog" aria-modal="false" aria-label="אפשרויות נגישות" hidden>
+        <h2 class="a11y-widget__title">הגדרות נגישות</h2>
+        <div class="a11y-widget__options">
+          <button class="a11y-widget__btn" id="a11yFontIncrease" aria-pressed="false">הגדל גודל טקסט</button>
+          <button class="a11y-widget__btn" id="a11yFontDecrease" aria-pressed="false">הקטן גודל טקסט</button>
+          <button class="a11y-widget__btn" id="a11yHighContrast" aria-pressed="false">ניגודיות גבוהה</button>
+          <button class="a11y-widget__btn" id="a11yGrayscale" aria-pressed="false">גווני אפור</button>
+          <button class="a11y-widget__btn" id="a11yUnderlineLinks" aria-pressed="false">הדגש קישורים</button>
+          <button class="a11y-widget__btn" id="a11yReset">אפס הכל</button>
+        </div>
+        <a href="/accessibility/" class="a11y-widget__statement">הצהרת נגישות</a>
+      </div>
+      <button class="a11y-widget__toggle" id="a11yToggle" aria-expanded="false" aria-controls="a11yPanel" aria-label="פתח תפריט נגישות">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="white" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.5 6c-2.61.7-5.67 1-8.5 1s-5.89-.3-8.5-1L3 8c1.86.5 4 .83 6 1v13h2v-6h2v6h2V9c2-.17 4.14-.5 6-1l-.5-2z"/>
+          <circle cx="12" cy="4" r="2"/>
+        </svg>
+      </button>
+    </div>
+
+    <script>
+    (function() {
+      var html = document.documentElement;
+      var toggle = document.getElementById('a11yToggle');
+      var panel = document.getElementById('a11yPanel');
+      var fontLevel = 0; // 0=normal, 1=lg, 2=xl
+
+      // שחזור מ-localStorage
+      function loadState() {
+        try {
+          var s = JSON.parse(localStorage.getItem('a11y') || '{}');
+          if (s.fontLevel) { fontLevel = s.fontLevel; applyFont(); }
+          if (s.highContrast) toggleClass('a11y-high-contrast', 'a11yHighContrast', true);
+          if (s.grayscale)    toggleClass('a11y-grayscale',      'a11yGrayscale',    true);
+          if (s.underline)    toggleClass('a11y-underline-links', 'a11yUnderlineLinks', true);
+        } catch(e) {}
+      }
+
+      function saveState() {
+        try {
+          localStorage.setItem('a11y', JSON.stringify({
+            fontLevel: fontLevel,
+            highContrast: html.classList.contains('a11y-high-contrast'),
+            grayscale: html.classList.contains('a11y-grayscale'),
+            underline: html.classList.contains('a11y-underline-links')
+          }));
+        } catch(e) {}
+      }
+
+      function applyFont() {
+        html.classList.remove('a11y-font-lg','a11y-font-xl');
+        if (fontLevel === 1) html.classList.add('a11y-font-lg');
+        if (fontLevel === 2) html.classList.add('a11y-font-xl');
+        updateBtn('a11yFontIncrease', fontLevel > 0);
+        updateBtn('a11yFontDecrease', fontLevel > 0);
+      }
+
+      function toggleClass(cls, btnId, forceOn) {
+        var active = forceOn !== undefined ? forceOn : !html.classList.contains(cls);
+        html.classList.toggle(cls, active);
+        updateBtn(btnId, active);
+        saveState();
+      }
+
+      function updateBtn(id, active) {
+        var btn = document.getElementById(id);
+        if (!btn) return;
+        btn.classList.toggle('a11y-widget__btn--active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }
+
+      // פתיחה/סגירה
+      toggle.addEventListener('click', function() {
+        var open = panel.hasAttribute('hidden');
+        if (open) { panel.removeAttribute('hidden'); toggle.setAttribute('aria-expanded','true'); }
+        else       { panel.setAttribute('hidden','');  toggle.setAttribute('aria-expanded','false'); }
+      });
+
+      // סגירה בלחיצה מחוץ לוידג'ט
+      document.addEventListener('click', function(e) {
+        if (!document.getElementById('a11yWidget').contains(e.target)) {
+          panel.setAttribute('hidden','');
+          toggle.setAttribute('aria-expanded','false');
+        }
+      });
+
+      // סגירה ב-Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          panel.setAttribute('hidden','');
+          toggle.setAttribute('aria-expanded','false');
+          toggle.focus();
+        }
+      });
+
+      document.getElementById('a11yFontIncrease').addEventListener('click', function() {
+        if (fontLevel < 2) { fontLevel++; applyFont(); saveState(); }
+      });
+      document.getElementById('a11yFontDecrease').addEventListener('click', function() {
+        if (fontLevel > 0) { fontLevel--; applyFont(); saveState(); }
+      });
+      document.getElementById('a11yHighContrast').addEventListener('click', function() {
+        toggleClass('a11y-high-contrast', 'a11yHighContrast');
+      });
+      document.getElementById('a11yGrayscale').addEventListener('click', function() {
+        toggleClass('a11y-grayscale', 'a11yGrayscale');
+      });
+      document.getElementById('a11yUnderlineLinks').addEventListener('click', function() {
+        toggleClass('a11y-underline-links', 'a11yUnderlineLinks');
+      });
+      document.getElementById('a11yReset').addEventListener('click', function() {
+        fontLevel = 0; applyFont();
+        html.classList.remove('a11y-high-contrast','a11y-grayscale','a11y-underline-links');
+        ['a11yHighContrast','a11yGrayscale','a11yUnderlineLinks'].forEach(function(id){ updateBtn(id, false); });
+        try { localStorage.removeItem('a11y'); } catch(e) {}
+      });
+
+      loadState();
+    })();
+    </script>
+
     {% block js %}{% endblock %}
 </body>
 </html>

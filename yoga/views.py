@@ -5,6 +5,10 @@ from .constants import SECTION7_DEFAULT_TEXTS
 from .models import SiteSettings, HomePage, HomePageQuote, Section7Testimonial
 
 
+def accessibility(request):
+    return render(request, 'yoga/accessibility.html')
+
+
 def _static_images_dir():
     return Path(django_settings.BASE_DIR) / "yoga" / "static" / "yoga" / "images"
 
